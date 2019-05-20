@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 //creo la claase Data Acces Object
 public class Dao {
 	//sfrutta due istanze
-	//SINGLETON
+	//SINGLETON classe che ha costruttore privato, è un deisgn pattern che permette di istanziare la sola classe una volta.
 	//FACTORY METHOD
 	
 	private static Dao d=null;
@@ -23,8 +23,10 @@ public class Dao {
 			try {
 				Context initCtx= new InitialContext();
 				Context envCtx= (Context) initCtx.lookup("java:comp/env");
-				//metodo che fa un look up sulla componente java a livello di ambiente (enviroment) che sono stati applicati.
-				//questo tipo di metodo restituisce un oggetto di tipo object, ed è il motivo per cui si restituisce 
+				//metodo che fa un look up sulla componente java a livello di ambiente (enviroment) 
+				//che sono stati applicati.
+				//questo tipo di metodo restituisce un oggetto di tipo object, 
+				//ed è il motivo per cui si restituisce 
 				//un cast(Context)
 				 ds = (DataSource)envCtx.lookup("jdbc/sakila");
 				//secondo LOOKUP che va a cercare un data source che si chiama appunto sakila

@@ -34,9 +34,12 @@ public class ControllerActor extends HttpServlet {
 	RequestDispatcher rd=request.getRequestDispatcher("views/actorResult.jsp");
 	request.setAttribute("AttoriByName", list);
 	
-	String del=request.getParameter("actor_id");
-	ActorImpl adel=new ActorImpl();
-	List<Actor> list=adel.deleteActorbyID(del);
+	String id=request.getParameter("idAttore");
+	ActorImpl ai1=new ActorImpl();
+	List<Actor> list= ai1.findByName(p);
+	RequestDispatcher rd=request.getRequestDispatcher("views/actorResult.jsp");
+	request.setAttribute("AttoriByName", list);
+	
 	
 	rd.forward(request, response);
 	

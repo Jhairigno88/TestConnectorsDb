@@ -8,7 +8,7 @@ public interface ActorUtility {
 	
 	public List<Actor> readAll();
 	
-	public int upDateActor(String n, String c);
+	public int upDateActor(String n, String c, int i);
 	
 	public int deleteActorbyID(int id);
 	

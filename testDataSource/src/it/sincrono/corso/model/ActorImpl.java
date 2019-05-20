@@ -12,6 +12,7 @@ import it.sincrono.corso.dao.Dao;
 public class ActorImpl implements ActorUtility {
 	
 	private Connection c= null;
+	private Connection d=null;
 	private List<Actor> lista= new ArrayList();
 	private Actor a=null;
 	@Override
@@ -27,26 +28,25 @@ public class ActorImpl implements ActorUtility {
 	}
 
 	@Override
-	public int upDateActor(String n, String c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int upDateActor(String n, String c, int i) {
+		int row=0;
+		d= Dao.getConnection();
+		try {
+			Statement s=d.createStatement();
+		 row=s.executeUpdate("UPDATE actor SET first_name='"+n+"', last_name= '"+c+"' WHERE actor_id='"+i+"';");
+		
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return row;
 	}
 
 	@Override
-	public String deleteActorbyID(Sgtring id) {
+	public int deleteActorbyID(int id) {
 		c=Dao.getConnection();
 		
-		try {
-			Statement d=this.c.createStatement();
-			ResultSet r=d.executeQuery("delete from actor where actor_id='"+id+"';");
-			while (r.next()) {
-				a=new Actor();
-				a.setActor_id(r.getString("actor_id"));
-				lista.remove(id);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	return id;
 	}
 
@@ -77,11 +77,29 @@ public class ActorImpl implements ActorUtility {
 	@Override
 	public List<Actor> findById(int id) {
 	
+		
 		c= Dao.getConnection();
+		try {
+			Statement s=c.createStatement();
+		ResultSet r=s.executeQuery("select * from actor where actor_id='"+id+"';");
+		while(r.next()) {
+			
+				a=new Actor();
+				
+				a.setActor_id(r.getString("first_name"));
+				
+				lista.add(a);
+			}
+		
+		} catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
 		
 		
-		
-		return null;
+	
 	}
 	
 }
